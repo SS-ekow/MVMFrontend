@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Menu, Phone, Person, ShoppingCart, Search } from '@mui/icons-material';
 import { PiDevicesDuotone } from "react-icons/pi";
 import { Select, MenuItem, TextField, IconButton } from '@mui/material';
