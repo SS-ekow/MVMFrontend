@@ -6,7 +6,7 @@ import ModalManager from './LoginModal';
 import Link from 'next/link';
 
 const Header: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [_, setIsModalOpen] = useState(false);
   return (
     <header className="border-b border-gray-200 bg-white text-gray-800">
       {/* Top Header */}
