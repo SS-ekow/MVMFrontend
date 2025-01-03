@@ -4,7 +4,6 @@ import { PiDevicesDuotone } from "react-icons/pi";
 import { Select, MenuItem, TextField, IconButton } from '@mui/material';
 import ModalManager from './LoginModal';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const Header: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

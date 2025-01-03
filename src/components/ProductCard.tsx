@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button, Rating } from '@mui/material';
-import InfoIcon from '@mui/icons-material/Info';
+
 import Link from 'next/link';
 import Image from 'next/image';
 
