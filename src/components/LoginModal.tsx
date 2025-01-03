@@ -3,6 +3,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { PiDevicesDuotone } from "react-icons/pi";
 
+
 // Validation Schemas
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
@@ -28,10 +29,9 @@ const LoginModal: React.FC<{ switchToSignup: () => void; onClose: () => void }> 
     <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md relative">
         <div className="flex items-center">
-                  <div className='w-10 h-10 rounded-full bg-blue-300 text-blue-800 text-xl text-center font-extrabold flex items-center justify-center'><PiDevicesDuotone /></div>
-        
-                  <span className="ml-2 text-xl font-bold text-blue-600">teckZone</span>
-                </div>
+          <div className='w-10 h-10 rounded-full bg-blue-300 text-blue-800 text-xl text-center font-extrabold flex items-center justify-center'><PiDevicesDuotone /></div>
+          <span className="ml-2 text-xl font-bold text-blue-600">teckZone</span>
+        </div>
         <button className="absolute top-3 right-3 text-gray-500 text-xl" onClick={onClose}>
           ×
         </button>
@@ -231,8 +231,6 @@ const SignupModal: React.FC<{ switchToLogin: () => void; onClose: () => void }> 
   );
 };
 
-
-
 // Main Component to Manage Modals
 const ModalManager: React.FC = () => {
   const [activeModal, setActiveModal] = useState<"login" | "signup" | null>(null);
@@ -243,12 +241,14 @@ const ModalManager: React.FC = () => {
 
   return (
     <div>
-      <a
-        onClick={() => setActiveModal("login")}
-        className=" px-4 py-2 rounded-lg hover:text-white hover:bg-blue-600 transition-all"
-      >
-        Login
-      </a>
+      
+        <a
+          onClick={() => setActiveModal("login")}
+          className=" px-4 py-2 rounded-lg hover:text-white hover:bg-blue-600 transition-all"
+        >
+          Login
+        </a>
+      
       {activeModal === "login" && <LoginModal switchToSignup={switchToSignup} onClose={closeModal} />}
       {activeModal === "signup" && <SignupModal switchToLogin={switchToLogin} onClose={closeModal} />}
     </div>

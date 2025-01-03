@@ -3,6 +3,8 @@ import { Menu, Phone, Person, ShoppingCart, Search } from '@mui/icons-material';
 import { PiDevicesDuotone } from "react-icons/pi";
 import { Select, MenuItem, TextField, IconButton } from '@mui/material';
 import ModalManager from './LoginModal';
+import Link from 'next/link';
+import Image from 'next/image';
 
 const Header: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,12 +13,12 @@ const Header: React.FC = () => {
       {/* Top Header */}
       <div className="container mx-auto flex flex-wrap items-center justify-between py-2 px-4">
         {/* Logo Section */}
-        <a href="/">
-        <div className="flex items-center">
-          <div className='w-10 h-10 rounded-full bg-blue-300 text-blue-800 text-xl text-center font-extrabold flex items-center justify-center'><PiDevicesDuotone /></div>
-
-          <span className="ml-2 text-xl font-bold text-blue-600">teckZone</span>
-        </div></a>
+        <Link href="/">
+          <div className="flex items-center">
+            <div className='w-10 h-10 rounded-full bg-blue-300 text-blue-800 text-xl text-center font-extrabold flex items-center justify-center'><PiDevicesDuotone /></div>
+            <span className="ml-2 text-xl font-bold text-blue-600">teckZone</span>
+          </div>
+        </Link>
 
         {/* Search and Category Section */}
         <div className="flex items-center space-x-4 flex-wrap">
@@ -53,8 +55,10 @@ const Header: React.FC = () => {
             <ModalManager/>
           </button>
           <div className="px-4 py-2 rounded-lg hover:text-white hover:bg-blue-600 transition-all">
-           <a href="/cart"> <ShoppingCart sx={{ color: 'gray' }} /></a>
-            <span className="text-sm">Cart</span>
+            <Link href="/cart">
+              <ShoppingCart sx={{ color: 'gray' }} />
+              <span className="text-sm">Cart</span>
+            </Link>
           </div>
         </div>
       </div>
@@ -63,21 +67,17 @@ const Header: React.FC = () => {
       {/* Navigation Links */}
       <div className="container mx-auto flex flex-wrap items-center justify-between py-2 px-4">
         <div className="flex items-center flex-wrap space-x-4">
-          <a className="text-gray-600 hover:text-blue-600" href="/products">Top Popular</a>
-          <a className="text-gray-600 hover:text-blue-600" href="/products">Flash Sale</a>
-          <a className="text-gray-600 hover:text-blue-600" href="/products">TV & Video</a>
-          <a className="text-gray-600 hover:text-blue-600" href="/products">Cell Phones</a>
-          <a className="text-gray-600 hover:text-blue-600" href="/products">iPad & Tablets</a>
-          <a className="text-gray-600 hover:text-blue-600" href="/products">Computer</a>
+          <Link className="text-gray-600 hover:text-blue-600" href="/products">Top Popular</Link>
+          <Link className="text-gray-600 hover:text-blue-600" href="/products">Flash Sale</Link>
+          <Link className="text-gray-600 hover:text-blue-600" href="/products">TV & Video</Link>
+          <Link className="text-gray-600 hover:text-blue-600" href="/products">Cell Phones</Link>
+          <Link className="text-gray-600 hover:text-blue-600" href="/products">iPad & Tablets</Link>
+          <Link className="text-gray-600 hover:text-blue-600" href="/products">Computer</Link>
         </div>
         <div className="flex items-center space-x-4 mt-2 md:mt-0">
-          <a className="text-gray-600 hover:text-blue-600" href="/productlisting">List a Product</a>
+          <Link className="text-gray-600 hover:text-blue-600" href="/productlisting">List a Product</Link>
         </div>
       </div>
-
-      
-
-      
     </header>
   );
 };
