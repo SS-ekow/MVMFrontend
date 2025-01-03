@@ -108,8 +108,8 @@ const CheckoutModal: React.FC<{ onClose: () => void; totalAmount: number }> = ({
     onClose,
     totalAmount,
 }) => {
-    const handleCreateOrder = (values: any) => {
-        console.log("Order Created:", values, "Total Amount:", totalAmount);
+    const handleCreateOrder = () => {
+        console.log("Order Created:", "Total Amount:", totalAmount);
         onClose();
     };
 

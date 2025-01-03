@@ -6,7 +6,6 @@ import ModalManager from './LoginModal';
 import Link from 'next/link';
 
 const Header: React.FC = () => {
-  const [_, setIsModalOpen] = useState(false);
   return (
     <header className="border-b border-gray-200 bg-white text-gray-800">
       {/* Top Header */}
@@ -49,7 +48,7 @@ const Header: React.FC = () => {
             <span className="text-sm">(+233) 1234-56789</span>
           </div>
           
-          <button className="flex items-center space-x-1 rounded-lg p-1" onClick={() => setIsModalOpen(true)}>
+          <button className="flex items-center space-x-1 rounded-lg p-1">
             <Person sx={{ color: 'gray' }} />
             <ModalManager/>
           </button>
