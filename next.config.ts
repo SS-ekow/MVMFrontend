@@ -5,4 +5,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 };
 
+module.exports = {
+  images: {
+    domains: ['storage.googleapis.com'],
+  },
+};
+
+
 export default nextConfig;

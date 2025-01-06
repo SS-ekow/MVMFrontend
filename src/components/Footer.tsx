@@ -17,41 +17,41 @@ const Footer = () => {
                 <div>
                     <h3 className="text-white font-bold mb-2">Get to Know Us</h3>
                     <ul>
-                        <li><Link href="#"><a className="hover:underline">Careers</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Blog</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">About teckZone</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Investor Relations</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">teckZone Devices</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">teckZone Science</a></Link></li>
+                        <li><Link href="#" className="hover:underline">Careers</Link></li>
+                        <li><Link href="#" className="hover:underline">Blog</Link></li>
+                        <li><Link href="#" className="hover:underline">About teckZone</Link></li>
+                        <li><Link href="#" className="hover:underline">Investor Relations</Link></li>
+                        <li><Link href="#" className="hover:underline">teckZone Devices</Link></li>
+                        <li><Link href="#" className="hover:underline">teckZone Science</Link></li>
                     </ul>
                 </div>
                 <div>
                     <h3 className="text-white font-bold mb-2">Make Money with Us</h3>
                     <ul>
-                        <li><Link href="#"><a className="hover:underline">Sell products on teckZone</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Sell on teckZone Business</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Become an Affiliate</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Advertise Your Products</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Self-Publish with Us</a></Link></li>
+                        <li><Link href="#" className="hover:underline">Sell products on teckZone</Link></li>
+                        <li><Link href="#" className="hover:underline">Sell on teckZone Business</Link></li>
+                        <li><Link href="#" className="hover:underline">Become an Affiliate</Link></li>
+                        <li><Link href="#" className="hover:underline">Advertise Your Products</Link></li>
+                        <li><Link href="#" className="hover:underline">Self-Publish with Us</Link></li>
                     </ul>
                 </div>
                 <div>
                     <h3 className="text-white font-bold mb-2">teckZone Payment Products</h3>
                     <ul>
-                        <li><Link href="#"><a className="hover:underline">teckZone Business Card</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Shop with Points</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Reload Your Balance</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">teckZone Currency Converter</a></Link></li>
+                        <li><Link href="#" className="hover:underline">teckZone Business Card</Link></li>
+                        <li><Link href="#" className="hover:underline">Shop with Points</Link></li>
+                        <li><Link href="#" className="hover:underline">Reload Your Balance</Link></li>
+                        <li><Link href="#" className="hover:underline">teckZone Currency Converter</Link></li>
                     </ul>
                 </div>
                 <div>
                     <h3 className="text-white font-bold mb-2">Let Us Help You</h3>
                     <ul>
-                        <li><Link href="#"><a className="hover:underline">Your Account</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Your Orders</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Shipping Rates & Policies</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Returns & Replacements</a></Link></li>
-                        <li><Link href="#"><a className="hover:underline">Help</a></Link></li>
+                        <li><Link href="#" className="hover:underline">Your Account</Link></li>
+                        <li><Link href="#" className="hover:underline">Your Orders</Link></li>
+                        <li><Link href="#" className="hover:underline">Shipping Rates & Policies</Link></li>
+                        <li><Link href="#" className="hover:underline">Returns & Replacements</Link></li>
+                        <li><Link href="#" className="hover:underline">Help</Link></li>
                     </ul>
                 </div>
             </div>
