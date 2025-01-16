@@ -1,5 +1,4 @@
-import Image from "next/image"
-import Link from "next/link"
+
 
 import { Truck, ShieldCheck, RotateCcw, ClockIcon as Clock24, Headphones } from 'lucide-react'
 
