@@ -11,7 +11,10 @@ const Layout = ({children}: LayoutProps) => {
     <>
     
     <Header/>
+    <main className="container mx-auto p-2 bg-slate-50 rounded-md">
     {children}
+
+    </main>
     <Footer/>
     </>
   )

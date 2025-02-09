@@ -1,11 +1,18 @@
+"use client";
+
+import { useEffect } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 import React, { useState } from "react";
 import Layout from "@/components/home/layout";
-
+import { RiDeleteBin6Line } from "react-icons/ri";
 import Image from 'next/image';
-
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { PiDevicesDuotone } from "react-icons/pi";
+
+
+
+
 
 // Define validation schema
 const CheckoutSchema = Yup.object().shape({
@@ -15,71 +22,153 @@ const CheckoutSchema = Yup.object().shape({
     state: Yup.string().required("State is required"),
 });
 
-// Define types for OrderItem props and state
-interface Order {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-}
+
 
 interface OrderItemProps {
     item: Order;
     onRemove: (id: number) => void;
 }
 
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''
+);
+
+// src/pages/Cart.tsx (or wherever your Cart component is located)
+
+
+export interface Order {
+  id: number;
+  name: string;
+  description: string;
+  price: number; // Price in USD (e.g. 10 means $10.00)
+  image: string;
+  // You can add a quantity property here if needed
+}
+
 const Cart: React.FC = () => {
-    const [order, setOrder] = useState<Order[]>([
-        { id: 1, name: "Product 1", description: "Description 1", price: 10, image: "/path/to/image1.jpg" },
-        { id: 2, name: "Product 2", description: "Description 2", price: 20, image: "/path/to/image2.jpg" },
-        { id: 3, name: "Product 3", description: "Description 3", price: 30, image: "/path/to/image3.jpg" },
-    ]);
+  const [order, setOrder] = useState<Order[]>([
+    {
+      id: 1,
+      name: "Product 1",
+      description: "Description 1",
+      price: 10,
+      image: "/path/to/image1.jpg",
+    },
+    {
+      id: 2,
+      name: "Product 2",
+      description: "Description 2",
+      price: 20,
+      image: "/path/to/image2.jpg",
+    },
+    {
+      id: 3,
+      name: "Product 3",
+      description: "Description 3",
+      price: 30,
+      image: "/path/to/image3.jpg",
+    },
+  ]);
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const PriceTotal = order.reduce((acc, item) => acc + item.price, 0);
+  // Calculate the total price
+  const PriceTotal = order.reduce((acc, item) => acc + item.price, 0);
 
-    const handleRemove = (id: number): void => {
-        setOrder(order.filter((item) => item.id !== id));
-    };
+  useEffect(() => {
+    // Check if this is a redirect back from Checkout
+    const query = new URLSearchParams(window.location.search);
+    if (query.get('success')) {
+      console.log('Order placed! You will receive an email confirmation.');
+    }
+    if (query.get('canceled')) {
+      console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+    }
+  }, []);
 
-    const handleCheckout = () => {
-        setIsModalOpen(true);
-    };
+  // Remove an item from the cart
+  const handleRemove = (id: number): void => {
+    setOrder(order.filter((item) => item.id !== id));
+  };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
+  // Handle checkout: post the order data and redirect to Stripe Checkout
+  // Example: src/pages/Cart.tsx
+const handleCheckout = async () => {
+  try {
+    const response = await fetch('/api/checkout_sessions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        cart: [
+          {
+            id: 1,
+            name: 'Product 1',
+            description: 'Description 1',
+            price: 10, // $10.00
+            quantity: 1,
+          },
+          // Add additional items as needed
+        ],
+      }),
+    });
 
-    return (
-        <Layout>
-            <section className="py-8 min-h-screen bg-gray-100">
-                <div className="w-full h-full container mx-auto bg-white rounded-lg p-8">
-                    {order.length > 0 ? (
-                        order.map((item) => <OrderItem key={item.id} item={item} onRemove={handleRemove} />)
-                    ) : (
-                        <p className="text-center text-gray-600">Your cart is empty.</p>
-                    )}
-                </div>
+    if (!response.ok) {
+      // Log the error response text for debugging
+      const errorText = await response.text();
+      throw new Error(`Error creating checkout session: ${errorText}`);
+    }
 
-                {order.length > 0 ? (
-                    <button
-                        onClick={handleCheckout}
-                        className="mt-4 ml-8 bg-blue-500 text-white rounded-lg p-2"
-                    >
-                        Checkout → Total: $ {PriceTotal}.00
-                    </button>
-                ) : (
-                    <button className="mt-4 ml-8 bg-gray-200 text-gray rounded-lg p-2" disabled>
-                        Checkout
-                    </button>
-                )}
-
-                {isModalOpen && <CheckoutModal onClose={closeModal} totalAmount={PriceTotal} />}
-            </section>
-        </Layout>
-    );
+    const data = await response.json();
+    if (data.url) {
+      // Redirect the user to the Stripe Checkout page
+      window.location.href = data.url;
+    } else {
+      console.error('Checkout session did not return a URL.');
+    }
+  } catch (error) {
+    console.error('Error during checkout:', error);
+  }
 };
+
+
+  return (
+    <Layout>
+      <section className="py-8 min-h-screen">
+        <div className="w-full container mx-auto bg-white rounded-lg p-8">
+          {order.length > 0 ? (
+            order.map((item) => (
+              <OrderItem key={item.id} item={item} onRemove={handleRemove} />
+            ))
+          ) : (
+            <p className="text-center text-gray-600">Your cart is empty.</p>
+          )}
+        </div>
+
+        <div className="mt-4 ml-8 text-xl">
+          Total: ${PriceTotal}.00
+        </div>
+
+        {order.length > 0 ? (
+          <button
+            onClick={handleCheckout}
+            className="mt-4 ml-8 bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-2"
+          >
+            Checkout
+          </button>
+        ) : (
+          <button
+            className="mt-4 ml-8 bg-gray-200 text-gray-600 rounded-lg p-2"
+            disabled
+          >
+            Checkout
+          </button>
+        )}
+      </section>
+    </Layout>
+  );
+};
+
+
+
+
 
 const OrderItem: React.FC<OrderItemProps> = ({ item, onRemove }) => {
     return (
@@ -92,12 +181,12 @@ const OrderItem: React.FC<OrderItemProps> = ({ item, onRemove }) => {
                 </div>
             </div>
             <div className="flex items-center">
-                <span className="text-lg font-medium">${item.price}</span>
+                <span className="text-lg font-medium mr-4">${item.price}</span>
                 <button
                     onClick={() => onRemove(item.id)}
-                    className="ml-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+                    
                 >
-                    x
+                    <RiDeleteBin6Line className="text-gray-600 hover:text-rose-500 cursor-pointer"/>
                 </button>
             </div>
         </div>

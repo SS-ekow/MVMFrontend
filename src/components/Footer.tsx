@@ -1,80 +1,105 @@
-import React from 'react'
-import Link from 'next/link'
-import { PiDevicesDuotone } from 'react-icons/pi'
+import Image from "next/image"
+import Link from "next/link"
+import { Facebook, Twitter, Instagram, Youtube } from "lucide-react"
+import { Button } from '@mui/material'
+import { PiDevicesDuotone } from "react-icons/pi";
 
-const Footer = () => {
-    return (
-        <div className="bg-blue-800 text-sm text-white p-8">
-            <Link href="/" passHref>
-                <div className="flex items-center cursor-pointer">
-                    <div className='w-10 h-10 rounded-full bg-white text-blue-800 text-xl text-center font-extrabold flex items-center justify-center'>
-                        <PiDevicesDuotone />
-                    </div>
-                    <span className="ml-2 text-xl font-bold text-white">teckZone</span>
-                </div>
-            </Link>
-            <div className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 className="text-white font-bold mb-2">Get to Know Us</h3>
-                    <ul>
-                        <li><Link href="#" className="hover:underline">Careers</Link></li>
-                        <li><Link href="#" className="hover:underline">Blog</Link></li>
-                        <li><Link href="#" className="hover:underline">About teckZone</Link></li>
-                        <li><Link href="#" className="hover:underline">Investor Relations</Link></li>
-                        <li><Link href="#" className="hover:underline">teckZone Devices</Link></li>
-                        <li><Link href="#" className="hover:underline">teckZone Science</Link></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 className="text-white font-bold mb-2">Make Money with Us</h3>
-                    <ul>
-                        <li><Link href="#" className="hover:underline">Sell products on teckZone</Link></li>
-                        <li><Link href="#" className="hover:underline">Sell on teckZone Business</Link></li>
-                        <li><Link href="#" className="hover:underline">Become an Affiliate</Link></li>
-                        <li><Link href="#" className="hover:underline">Advertise Your Products</Link></li>
-                        <li><Link href="#" className="hover:underline">Self-Publish with Us</Link></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 className="text-white font-bold mb-2">teckZone Payment Products</h3>
-                    <ul>
-                        <li><Link href="#" className="hover:underline">teckZone Business Card</Link></li>
-                        <li><Link href="#" className="hover:underline">Shop with Points</Link></li>
-                        <li><Link href="#" className="hover:underline">Reload Your Balance</Link></li>
-                        <li><Link href="#" className="hover:underline">teckZone Currency Converter</Link></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 className="text-white font-bold mb-2">Let Us Help You</h3>
-                    <ul>
-                        <li><Link href="#" className="hover:underline">Your Account</Link></li>
-                        <li><Link href="#" className="hover:underline">Your Orders</Link></li>
-                        <li><Link href="#" className="hover:underline">Shipping Rates & Policies</Link></li>
-                        <li><Link href="#" className="hover:underline">Returns & Replacements</Link></li>
-                        <li><Link href="#" className="hover:underline">Help</Link></li>
-                    </ul>
-                </div>
+
+const categoryLinks = [
+  { label: "Sofa", href: "/category/sofa" },
+  { label: "Armchair", href: "/category/armchair" },
+  { label: "Wing Chair", href: "/category/wing-chair" },
+  { label: "Desk Chair", href: "/category/desk-chair" },
+  { label: "Wooden Chair", href: "/category/wooden-chair" },
+  { label: "Park Bench", href: "/category/park-bench" },
+]
+
+const supportLinks = [
+  { label: "Help & Support", href: "/help-support" },
+  { label: "Tearms & Conditions", href: "/terms" },
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Help", href: "/help" },
+
+]
+
+export default function Footer() {
+  return (
+    <footer className="bg-blue-400 max-h-[40vh] overflow-y-hidden mt-8">
+      <div className="container mx-auto px-4 py-6">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+          {/* Brand Column */}
+          <div className="space-y-3">
+            <Link href="/">
+           <div className="flex items-center">
+             <div className='w-10 h-10 rounded-full bg-blue-300 text-blue-800 text-xl text-center font-extrabold flex items-center justify-center'><PiDevicesDuotone /></div>
+            <span className="ml-2 text-xl font-bold text-blue-600">teckZone</span>
+         </div>
+         </Link>
+            <p className="text-sm text-white line-clamp-2">
+              Vivamus tristique odio sit amet velit semper, eu posuere turpis interdum. Cras egestas purus
+            </p>
+            <div className="flex gap-3">
+              <Link href="#" className="text-white hover:text-[#029fae]">
+                <Facebook className="h-4 w-4" />
+              </Link>
+              <Link href="#" className="text-white hover:text-[#029fae]">
+                <Twitter className="h-4 w-4" />
+              </Link>
+              <Link href="#" className="text-white hover:text-[#029fae]">
+                <Instagram className="h-4 w-4" />
+              </Link>
+              <Link href="#" className="text-white hover:text-[#029fae]">
+                <Youtube className="h-4 w-4" />
+              </Link>
             </div>
-            <div className="bg-gray-700 py-4">
-                <div className="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between">
-                    <div className="flex items-center space-x-4 mt-4 sm:mt-0">
-                        <div className="flex items-center space-x-2">
-                            <i className="fas fa-globe"></i>
-                            <span>English</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <i className="fas fa-dollar-sign"></i>
-                            <span>GHS- Ghana Cedis</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                            <i className="fas fa-flag-ghana"></i>
-                            <span>Ghana</span>
-                        </div>
-                    </div>
-                </div>
+          </div>
+
+          {/* Category Column */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-wider">CATEGORY</h3>
+            <ul className="space-y-2 text-sm">
+              {categoryLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-white hover:text-[#029fae]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Support Column */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-wider">SUPPORT</h3>
+            <ul className="space-y-2 text-sm">
+              {supportLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-white hover:text-[#029fae]">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Newsletter Column */}
+          <div className="space-y-3">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-wider">NEWSLETTER</h3>
+            <div className="space-y-2">
+              <div className="flex gap-2">
+                <input type="email" placeholder="Your email" className="flex-1 h-9 text-sm px-4 border-1 rounded-md" />
+                <Button className="bg-blue-500 hover:bg-[#029fae]/90 h-9 text-sm rounded-md">Subscribe</Button>
+              </div>
+              <p className="text-xs text-white line-clamp-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt erat enim.
+              </p>
             </div>
+          </div>
         </div>
-    )
+      </div>
+
+      
+    </footer>
+  )
 }
 
-export default Footer

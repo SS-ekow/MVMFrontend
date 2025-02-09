@@ -7,9 +7,13 @@ const nextConfig: NextConfig = {
 
 module.exports = {
   images: {
-    domains: ['storage.googleapis.com'],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
   },
 };
-
 
 export default nextConfig;

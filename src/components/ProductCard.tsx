@@ -1,71 +1,91 @@
-import React from 'react';
-import { Box, Typography, Button, Rating } from '@mui/material';
+"use client"
 
-import Link from 'next/link';
-import Image from 'next/image';
+import { Heart, ShoppingCart } from "lucide-react"
+import Image from "next/image"
+import { Button } from '@mui/material';
+import Link from "next/link";
 
-export interface ProductProps {
-  title: string;
-  image: string;
-  price: number;
-  rating: number;
-  onAddToCart?: () => void;
+interface ProductCardProps {
+  title: string
+  price: number
+  originalPrice?: number
+  image: string
+  isNew?: boolean
+  isSale?: boolean
+  onAddToCart?: () => void
+  onAddToWishlist?: () => void
 }
 
-export const defaultProduct: ProductProps = {
-  title: "Solareye Compressed Air Duster-3-Gear Adjustable Electric Air Duster, Rechargeable Cordless Air Blower with Brushless Moto...",
-  image: "https://storage.googleapis.com/a1aa/image/142ADp5l6MYiEtNJkZGlyBZM4lf7AL5S9eJIJ9a05ZfZxVCoA.jpg",
-  rating: 4.5,
-  price: 49.99,
-};
-
-const ProductCard: React.FC<ProductProps> = ({ title, image, price, rating, onAddToCart }) => {
+export function ProductCard({
+  title,
+  price,
+  originalPrice,
+  image,
+  isNew,
+  isSale,
+  onAddToCart,
+  onAddToWishlist,
+}: ProductCardProps) {
   return (
-    <Link href="/product/a" passHref>
-      <Box
-        sx={{
-          backgroundColor: "white",
-          border: 1,
-          borderColor: "grey.300",
-          borderRadius: 2,
-          boxShadow: 2,
-          padding: 2,
-          maxWidth: 300,
-          textAlign: "center",
-        }}
-      >
-        <Box sx={{ width: "100%", height: 200, position: 'relative', mb: 1 }}>
-          <Image
-            src={image}
-            alt={title}
-            layout="fill"
-            objectFit="cover"
-            style={{ borderRadius: '8px' }}
-          />
-        </Box>
-        <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }} noWrap>
-          {title}
-        </Typography>
-        <Rating value={rating} precision={0.5} readOnly sx={{ mb: 1 }} />
-        <Typography variant="h6" sx={{ fontWeight: "bold", mb: 1 }}>
-          ${price.toFixed(2)}
-        </Typography>
-        <Button
-          variant="contained"
-          size="small"
-          sx={{
-            backgroundColor: "primary.main",
-            color: "white",
-            "&:hover": { backgroundColor: "primary.dark" },
-            fontSize: "0.875rem",
-          }}
-          onClick={onAddToCart}
-        >
-          Add to Cart
-        </Button>
-      </Box>
-    </Link>
-  );
-};
+    <div className="group relative">
+      {/* Product Image */}
+      <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100">
+        <Link href={`/product/${title}`}>
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={title}
+          fill
+          className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+        />
+        </Link>
 
-export default ProductCard;
+        {/* Status Badge */}
+        {isNew && (
+          <span className="absolute left-4 top-4 rounded bg-[#01ad5a] px-2 py-1 text-xs font-medium text-white">
+            New
+          </span>
+        )}
+        {isSale && (
+          <span className="absolute left-4 top-4 rounded bg-[#f5813f] px-2 py-1 text-xs font-medium text-white">
+            Sales
+          </span>
+        )}
+
+        {/* Wishlist Button */}
+        <button
+          onClick={onAddToWishlist}
+          className="absolute right-4 top-4 rounded-full bg-white p-2 text-gray-900 shadow-sm hover:bg-gray-50"
+        >
+          <Heart className="h-4 w-4" />
+        </button>
+
+        {/* Quick Add Button - Shows on Hover */}
+        <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 transition-opacity group-hover:opacity-100">
+          <Button onClick={onAddToCart} className="w-full bg-white text-[#272343] hover:bg-gray-50">
+            <ShoppingCart className="mr-2 h-4 w-4" />
+            Add to Cart
+          </Button>
+        </div>
+      </div>
+
+      {/* Product Info */}
+      <div className="mt-4 flex items-center justify-between">
+        <div>
+          <h3 className="text-sm font-medium text-[#272343]">{title}</h3>
+          <div className="flex items-center gap-2">
+            <p className="text-lg font-bold text-[#272343]">${price}</p>
+            {originalPrice && <p className="text-sm text-gray-500 line-through">${originalPrice}</p>}
+          </div>
+        </div>
+        <Button
+          onClick={onAddToCart}
+          size="small"
+          className="h-10 w-10 rounded-lg bg-[#029fae] text-white hover:bg-[#029fae]/90"
+        >
+          <ShoppingCart className="h-4 w-4" />
+        </Button>
+      </div>
+    </div>
+  )
+}
+

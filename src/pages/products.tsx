@@ -1,7 +1,40 @@
 import Layout from '@/components/home/layout'
-import ProductCard, { defaultProduct } from '@/components/ProductCard'
+import { ProductCard } from "../components/ProductCard";
 import React from 'react'
 
+const products = [
+  {
+    id: 1,
+    title: "Library Stool Chair",
+    price: 20,
+    image:
+      "https://images.app.goo.gl/Uyc5B8uVthRaqk4b9",
+    isNew: true,
+  },
+  {
+    id: 2,
+    title: "Library Stool Chair",
+    price: 20,
+    originalPrice: 30,
+    image:
+      "",
+    isSale: true,
+  },
+  {
+    id: 3,
+    title: "Library Stool Chair",
+    price: 20,
+    image:
+      "",
+  },
+  {
+    id: 4,
+    title: "Library Stool Chair",
+    price: 20,
+    image:
+      "",
+  },
+]
 
 const Products = () => {
     return (
@@ -25,23 +58,19 @@ const Products = () => {
                         </div>
                     </div>
                     <div className='w-full flex justify-around gap-4 flex-wrap'>
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
-                        <ProductCard {...defaultProduct} />
+                        {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              title={product.title}
+              price={product.price}
+              originalPrice={product.originalPrice}
+              image={product.image}
+              isNew={product.isNew}
+              isSale={product.isSale}
+              onAddToCart={() => console.log("Added to cart:", product.id)}
+              onAddToWishlist={() => console.log("Added to wishlist:", product.id)}
+            />
+          ))}
                     </div>
                 </div>
             </section>
@@ -50,3 +79,6 @@ const Products = () => {
 }
 
 export default Products
+
+
+
